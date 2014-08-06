@@ -12,18 +12,22 @@ public class ImageEnhancement {
 			JOptionPane.showMessageDialog(null, "PNG file please");
 			return;
 		}
-		
+
 		new ImageEnhancement(args[0]);
 	}
-	
+
+	/**
+	 *
+	 * @param imagepath
+	 */
 	public ImageEnhancement(String imagepath){
 		int[][] input = ImageHandler.readImage(imagepath);
 		ImageHandler.displayImage("original", input);
-		
+
 		// create enhancement filter
 		double[][] laplacianMask1 = { { 0, -1, 0 }, { -1, 5, -1 }, { 0, -1, 0 } };
 		double[][] laplacianMask2 = { { 1, -2, 1 }, { -2, 5, -2 }, { 1, -2, 1 } };
-		
+
 		// apply enhancement filter
 		int[][] output = ImageHandler.applyConvolutionMask(input, laplacianMask1);
 		output = ImageHandler.brightenImage(output);
